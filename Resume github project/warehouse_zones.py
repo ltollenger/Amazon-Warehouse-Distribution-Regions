@@ -28,6 +28,7 @@ def in_region(lat:float,long:float):
     else:
         return 0
 
+
 df_zipcodes['in_region'] = df_zipcodes.apply(lambda x: in_region(x.LAT,x.LNG), axis=1)
 
 df_zipcodes = df_zipcodes[df_zipcodes['in_region']!=0][['ZIP','LAT','LNG']]
@@ -53,6 +54,7 @@ def haversine(lat1:float, long1:float, lat2:float, long2:float):
     a = math.sin(dlat/2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin(dlong/2)**2
     b = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     return R * b
+
 
 df_joined['distance_mi'] = df_joined.apply(lambda x: haversine(x.LAT,x.LNG,x.lat,x.long), axis=1)
 
